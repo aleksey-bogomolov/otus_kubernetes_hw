@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: hello-deployment
+spec:
+    replicas: 2
+    selector:
+       matchLabels:
+          app: test-docker-app
+    template:
+       metadata:
+          labels:
+             app: test-docker-app
+       spec:
+          containers:
+          - name: testdocker
+            image: bogomolovaleksey/testdocker:v3
+            ports:
+              - name: web
+                containerPort: 8005
+            env:
+              - name: TestDocker_DefaultConnection
+                valueFrom:
+                  secretKeyRef:
+                    name: hello-secret
+                    key: DATABASE_URI
+              - name: GREETING
+                valueFrom:
+                  configMapKeyRef:
+                    name: hello-config
+                    key: GREETING
+            livenessProbe:
+              httpGet:
+                port: 8005
+                path: /
+              initialDelaySeconds: 10
+              periodSeconds: 5
+              timeoutSeconds: 2
+            readinessProbe:
+              httpGet:
+                port: 8005
+                path: /health
+              initialDelaySeconds: 10
+              periodSeconds: 5

@@ -1,0 +1,1 @@
+kubectl apply -f app-config.yaml -f postgres.yaml -f deployment.yaml -f service.yaml -f ingress.yaml

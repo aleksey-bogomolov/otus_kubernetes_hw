@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hello-config
+data:
+  GREETING: Bonjour
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: hello-secret
+type: Opaque
+data:
+  DATABASE_URI: SG9zdD1wb3N0Z3JlcztQb3J0PTU0MzI7VXNlck5hbWU9bXl1c2VyO1Bhc3N3b3JkPXBhc3N3ZDtEYXRhYmFzZT1teWFwcAo=
