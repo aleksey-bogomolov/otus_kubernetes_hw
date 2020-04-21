@@ -1,0 +1,198 @@
+{
+	"info": {
+		"_postman_id": "123a93a8-c09e-465a-9ff1-ff000814c7ec",
+		"name": "testDocker localhost",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "home",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{testdockerhost}}",
+					"host": [
+						"{{testdockerhost}}"
+					]
+				},
+				"description": "/"
+			},
+			"response": []
+		},
+		{
+			"name": "createUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d9d7691b-676c-4875-9ab9-a47cd9933824",
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody)",
+							"pm.collectionVariables.set(\"userId\", responseJSON[\"id\"])"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"userName\": \"TestUser\",\n        \"firstName\": \"Donald\",\n        \"lastName\": \"Tramp\",\n        \"email\": \"donald.tramp@usa.com\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{testdockerhost}}/users/",
+					"host": [
+						"{{testdockerhost}}"
+					],
+					"path": [
+						"users",
+						""
+					]
+				},
+				"description": "Create new user"
+			},
+			"response": []
+		},
+		{
+			"name": "getUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "47577347-a464-4aca-b80e-806b002abbef",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{testdockerhost}}/users/{{userId}}",
+					"host": [
+						"{{testdockerhost}}"
+					],
+					"path": [
+						"users",
+						"{{userId}}"
+					]
+				},
+				"description": "Get user by Id"
+			},
+			"response": []
+		},
+		{
+			"name": "updateuser",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\":{{userId}},\n    \"userName\": \"UserTest\",\n    \"firstName\": \"Vova\",\n    \"lastName\": \"Petrov\",\n    \"email\": \"vova@usa.com\",\n    \"phone\": \"112\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{testdockerhost}}/users/{{userId}}",
+					"host": [
+						"{{testdockerhost}}"
+					],
+					"path": [
+						"users",
+						"{{userId}}"
+					]
+				},
+				"description": "Update user data"
+			},
+			"response": []
+		},
+		{
+			"name": "getUsers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{testdockerhost}}/users",
+					"host": [
+						"{{testdockerhost}}"
+					],
+					"path": [
+						"users"
+					]
+				},
+				"description": "Get all users"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteUser",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{testdockerhost}}/users/{{userId}}",
+					"host": [
+						"{{testdockerhost}}"
+					],
+					"path": [
+						"users",
+						"{{userId}}"
+					]
+				},
+				"description": "Delete user"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "8bd10afb-07b7-4d00-8630-2a326eecc3ee",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "3804ae5d-8fce-4441-a307-fc4d8ab71728",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "f74900b4-893b-44e8-bb12-a2430bc72197",
+			"key": "testdockerhost",
+			"value": "http://arch.homework/otusapp",
+			"type": "string"
+		},
+		{
+			"id": "445083f9-1926-4a2c-865f-fac7ab6a92ad",
+			"key": "userId",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
